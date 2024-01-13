@@ -9,14 +9,16 @@ import {
 } from "react-native";
 
 import { COLORS, SIZES } from "../../../constants";
+import useFetch from "../../../hook/useFetch";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import styles from "./popularjobs.style";
 
 const Popularjobs = () => {
   const router = useRouter();
-  const data = [1, 2, 3, 4];
-  const isLoading = false;
-  const error = "";
+  const { data, isLoading, error } = useFetch("search", {
+    query: "React developer",
+    num_pages: "1",
+  });
 
   const [selectedJob, setSelectedJob] = useState();
 
@@ -52,7 +54,6 @@ const Popularjobs = () => {
             keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
-            showsHorizontalScrollIndicator={false}
           />
         )}
       </View>
